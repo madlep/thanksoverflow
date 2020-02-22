@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'v01/admin/', to: 'v01/admin#index'
+  post 'v01/admin/import_credits', to: 'v01/admin#import_credits'
 end
