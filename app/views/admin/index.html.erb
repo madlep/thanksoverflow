@@ -9,3 +9,5 @@
 <h1>thanksoverflow admin</h1>
 
 <p><%= button_to "Import credits from TMDb", action: :import_credits %></p>
+
+<p><%= button_to "Reset credits", {action: :reset_credits}, method: :delete, data: {confirm: "Sure? This will DELETE ALL THE TITLES!"} %></p>

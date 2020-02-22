@@ -35,4 +35,10 @@ class V01::AdminController < ActionController::Base
     flash[:error] = "#{error_count} titles had errors preventing saving" if error_count > 0
     redirect_to action: :index
   end
+
+  def reset_credits
+    deleted_count = Title.delete_all
+    flash[:notice] = "Deleted #{deleted_count} titles"
+    redirect_to action: :index
+  end
 end 
