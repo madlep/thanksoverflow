@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'v01/admin/', to: 'v01/admin#index'
-  post 'v01/admin/import_credits', to: 'v01/admin#import_credits'
-  delete 'v01/admin/reset_credits', to: 'v01/admin#reset_credits'
+  namespace 'v01' do
+    get 'admin/', to: 'admin#index'
+    post 'admin/import_credits', to: 'admin#import_credits'
+    delete 'admin/reset_credits', to: 'admin#reset_credits'
+  end
 end
