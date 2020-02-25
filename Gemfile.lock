@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/madlep/Values.git
+  revision: 0d9260a23240aef0891246de0a7c9ce6bcfc86d6
+  branch: ruby_27_pattern_matching_support
+  specs:
+    values (1.8.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -252,6 +259,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  values!
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
