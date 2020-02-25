@@ -10,4 +10,10 @@ Rails.application.routes.draw do
     post 'admin/import_credits', to: 'admin#import_credits'
     delete 'admin/reset_credits', to: 'admin#reset_credits'
   end
+
+  namespace 'v03' do
+    get 'admin/', to: 'admin#index'
+    post 'admin/import_credits', to: 'admin#import_credits'
+    delete 'admin/reset_credits', to: 'admin#reset_credits'
+  end
 end
