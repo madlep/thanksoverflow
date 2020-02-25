@@ -10,15 +10,15 @@ class V03::AdminController < ActionController::Base
       person_id: THANKS_ID,
       api_key: Rails.configuration.tmdb_api_key
     )
-    result = importer.import()
 
-    if result.success?
-      result = result.result
-      flash[:notice] = "Imported #{result.inserted_count} new credits, updated #{result.updated_count}"
-      flash[:error] = "#{result.error_count} titles had errors preventing saving" if result.error_count > 0
-      redirect_to action: :index
-    else
-      flash[:error] = result.message
+    case importer.import()
+    in V03::Core::Success[
+      V03::Core::ImportSummary[inserted_count, updated_count, error_count]
+    ]
+      flash[:notice] = "Imported #{inserted_count} new credits, updated #{updated_count}"
+      flash[:error] = "#{error_count} titles had errors preventing saving" if error_count > 0
+    in V03::Core::Failure[message]
+      flash[:error] = "Fatal error prevented import: #{message.inspect}"
     end
   end
 

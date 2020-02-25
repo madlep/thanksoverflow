@@ -34,19 +34,19 @@ RSpec.describe V03::AdminController, type: :request do
       it "will error due to bad JSON" do
         post v03_admin_import_credits_path()
         expect(flash[:notice]).to be_nil
-        expect(flash[:error]).to eq("error fetching credits. Status=500 Internal Server Error")
+        expect(flash[:error]).to eq("Fatal error prevented import: \"error fetching credits. Status=500 Internal Server Error\"")
       end
     end
 
     describe "when JSON parsing fails due to bad data" do
       before do
-        expect(JSON).to receive(:parse).and_raise(JSON::ParserError)
+        expect(JSON).to receive(:parse).and_raise(JSON::ParserError.new("foo was too bar"))
       end
 
       it "will bubble up the error" do
         post v03_admin_import_credits_path()
         expect(flash[:notice]).to be_nil
-        expect(flash[:error]).to be_instance_of(JSON::ParserError)
+        expect(flash[:error]).to eq("Fatal error prevented import: #<JSON::ParserError: foo was too bar>")
       end
     end
   end
