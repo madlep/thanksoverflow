@@ -20,6 +20,7 @@ class V03::AdminController < ActionController::Base
     in V03::Core::Failure[message]
       flash[:error] = "Fatal error prevented import: #{message.inspect}"
     end
+    redirect_to action: :index
   end
 
   def reset_credits
