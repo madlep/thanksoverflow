@@ -7,14 +7,13 @@ class V05::CreditImporterShell
   end
 
   def import()
-    V05::CreditImporterCore.new.(
+    V05::CreditImporterCore.(
       method(:fetch_credits),
       method(:find_title),
       ImportSummary.new(0,0,0)
     )
   end
 
-  private
   def fetch_credits()
     url = "https://api.themoviedb.org/3/person/#{@person_id}/combined_credits?api_key=#{@api_key}&language=en-US"
     response = HTTP.get(url)

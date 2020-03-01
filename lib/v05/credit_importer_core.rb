@@ -1,5 +1,7 @@
-class V05::CreditImporterCore
+module V05::CreditImporterCore
   include V05::Core
+
+  module_function
 
   def call(fetch_credits, find_title, import_summary)
     fetch_credits.()
