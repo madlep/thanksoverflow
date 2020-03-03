@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  %w{v01 v02 v03 v04 v05}.each do |v|
+  %w{v01 v02 v03 v04 v05 v06}.each do |v|
     namespace v do
       get 'admin/', to: 'admin#index'
       post 'admin/import_credits', to: 'admin#import_credits'
