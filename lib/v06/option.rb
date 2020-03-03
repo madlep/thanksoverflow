@@ -3,7 +3,7 @@ module V06
     module_function
 
     def of(value)
-      if value
+      if !value.nil?
         Some.new(value)
       else
         None
