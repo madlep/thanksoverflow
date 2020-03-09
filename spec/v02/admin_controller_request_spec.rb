@@ -12,11 +12,32 @@ module V02
               body: File.read("spec/fixtures/person_31_combined_credits.json")
             )
           )
+
+          Title.create!(
+            tmdb_id: 13,
+            title: "Forrest Gump",
+            character: "Forrest Gump",
+            release_date: "1994-07-06",
+            media_type: "movie",
+            popularity: 0.31462e2,
+            synced_at: "2020-02-22 03:48:06"
+          )
         end
 
         it "runs without error" do
           post v02_admin_import_credits_path()
-          expect(flash[:notice]).to match(/Imported \d+ new credits, updated \d+/)
+          expect(flash[:notice]).to match(/Imported 103 new credits, updated 1/)
+          expect(flash[:error]).to match(/59 titles had errors preventing saving/)
+        end
+      end
+
+      describe "when http call fails due to error" do
+        before do
+          expect(HTTP).to receive(:get).and_raise(HTTP::Error.new("something broke"))
+        end
+
+        it "will bubble up the error" do
+          expect{ post v02_admin_import_credits_path() }.to raise_error(HTTP::Error)
         end
       end
 
